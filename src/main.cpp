@@ -31,9 +31,7 @@
 using namespace llvm;
 using namespace llvm::orc;
 
-//===----------------------------------------------------------------------===//
 // AST Class Hierarchy
-//===----------------------------------------------------------------------===//
 
 class ExprAST {
 public:
@@ -92,9 +90,9 @@ public:
     Function *codegen();
 };
 
-//===----------------------------------------------------------------------===//
+
 // Global LLVM & Compiler State
-//===----------------------------------------------------------------------===//
+
 
 static std::unique_ptr<LLVMContext> TheContext;
 static std::unique_ptr<Module> TheModule;
@@ -128,9 +126,8 @@ Function *getFunction(std::string Name) {
     return nullptr;
 }
 
-//===----------------------------------------------------------------------===//
 // Codegen Implementations
-//===----------------------------------------------------------------------===//
+
 
 Value *NumberExprAST::codegen() {
     return ConstantFP::get(*TheContext, APFloat(Val));
@@ -214,9 +211,9 @@ Function *FunctionAST::codegen() {
     return nullptr;
 }
 
-//===----------------------------------------------------------------------===//
+
 // Parser
-//===----------------------------------------------------------------------===//
+
 
 static int CurTok;
 static int getNextToken() { return CurTok = gettok(); }
@@ -360,9 +357,8 @@ static std::unique_ptr<FunctionAST> ParseTopLevelExpr() {
     return nullptr;
 }
 
-//===----------------------------------------------------------------------===//
+
 // Module Management & Pass Configuration
-//===----------------------------------------------------------------------===//
 
 static void InitializeModuleAndManagers() {
     TheContext = std::make_unique<LLVMContext>();
@@ -392,9 +388,9 @@ static void InitializeModuleAndManagers() {
     PB.crossRegisterProxies(*TheLAM, *TheFAM, *TheCGAM, *TheMAM);
 }
 
-//===----------------------------------------------------------------------===//
+
 // Execution Driver
-//===----------------------------------------------------------------------===//
+
 
 static void HandleDefinition() {
     if (auto FnAST = ParseDefinition()) {
