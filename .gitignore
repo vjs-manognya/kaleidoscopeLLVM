@@ -1,0 +1,23 @@
+# Build directory
+build/
+bin/
+lib/
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.ninja
+.ninja_*
+
+# Binary output
+kaleidoscope_jit
+*.o
+*.a
+*.so
+
+# Editor files
+.vscode/
+.idea/
+*.swp   
